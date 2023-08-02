@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 8.0.31, for macos12.6 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.33, for macos12.6 (x86_64)
 --
 -- Host: localhost    Database: little_lemon_db
 -- ------------------------------------------------------
@@ -16,32 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Bookings`
+-- Table structure for table `Customers`
 --
 
-DROP TABLE IF EXISTS `Bookings`;
+DROP TABLE IF EXISTS `Customers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Bookings` (
-  `BookingID` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Customers` (
+  `CustomerID` int NOT NULL AUTO_INCREMENT,
   `TableNo` int DEFAULT NULL,
-  `GuestFirstName` varchar(100) NOT NULL,
-  `GuestLastName` varchar(100) NOT NULL,
+  `FirstName` varchar(100) NOT NULL,
+  `LastName` varchar(100) NOT NULL,
   `BookingSlot` time NOT NULL,
   `EmployeeID` int DEFAULT NULL,
   `BookingStatus` varchar(255) DEFAULT 'Waiting',
-  PRIMARY KEY (`BookingID`)
+  PRIMARY KEY (`CustomerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Bookings`
+-- Dumping data for table `Customers`
 --
 
-LOCK TABLES `Bookings` WRITE;
-/*!40000 ALTER TABLE `Bookings` DISABLE KEYS */;
-INSERT INTO `Bookings` VALUES (1,12,'Anna','Iversen','19:00:00',1,'Waiting'),(2,12,'Joakim','Iversen','19:00:00',1,'Waiting'),(3,19,'Vanessa','McCarthy','15:00:00',3,'Waiting'),(4,15,'Marcos','Romero','17:30:00',4,'Waiting'),(5,5,'Hiroki','Yamane','18:30:00',2,'Waiting'),(6,8,'Diana','Pinto','20:00:00',5,'Waiting'),(7,8,'Anees','Java','18:00:00',6,'Waiting'),(8,5,'Bald','Vin','19:00:00',6,'Waiting'),(9,8,'Anees','Java','18:00:00',6,'Waiting'),(10,5,'Bald','Vin','19:00:00',6,'Waiting'),(11,8,'Anees','Java','18:00:00',6,'Waiting'),(12,5,'Bald','Vin','19:00:00',6,'Waiting');
-/*!40000 ALTER TABLE `Bookings` ENABLE KEYS */;
+LOCK TABLES `Customers` WRITE;
+/*!40000 ALTER TABLE `Customers` DISABLE KEYS */;
+INSERT INTO `Customers` VALUES (1,12,'Anna','Iversen','19:00:00',1,'Waiting'),(2,12,'Joakim','Iversen','19:00:00',1,'Waiting'),(3,19,'Vanessa','McCarthy','15:00:00',3,'Waiting'),(4,15,'Marcos','Romero','17:30:00',4,'Waiting'),(5,5,'Hiroki','Yamane','18:30:00',2,'Waiting'),(6,8,'Diana','Pinto','20:00:00',5,'Waiting'),(7,8,'Anees','Java','18:00:00',6,'Waiting'),(8,5,'Bald','Vin','19:00:00',6,'Waiting'),(9,8,'Anees','Java','18:00:00',6,'Waiting'),(10,5,'Bald','Vin','19:00:00',6,'Waiting'),(11,8,'Anees','Java','18:00:00',6,'Waiting'),(12,5,'Bald','Vin','19:00:00',6,'Waiting');
+/*!40000 ALTER TABLE `Customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,10 +135,12 @@ CREATE TABLE `Orders` (
   `OrderID` int NOT NULL,
   `TableNo` int NOT NULL,
   `MenuID` int DEFAULT NULL,
-  `BookingID` int DEFAULT NULL,
-  `BillAmount` int DEFAULT NULL,
+  `CustomerID` int NOT NULL,
+  `Cost` int DEFAULT NULL,
   `Quantity` int DEFAULT NULL,
-  PRIMARY KEY (`OrderID`,`TableNo`)
+  PRIMARY KEY (`OrderID`,`TableNo`),
+  KEY `CustomerID_idx` (`CustomerID`),
+  CONSTRAINT `CustomerID` FOREIGN KEY (`CustomerID`) REFERENCES `Customers` (`CustomerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,7 +150,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (1,12,1,1,86,2),(2,19,2,2,37,1),(3,15,2,3,37,1),(4,5,3,4,40,1),(5,8,1,5,43,1);
+INSERT INTO `Orders` VALUES (1,12,1,1,86,2),(1,19,3,2,65,8),(2,19,2,2,37,1),(3,15,2,3,37,1),(4,5,3,4,40,1),(5,8,1,5,43,1);
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -161,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-28  3:20:13
+-- Dump completed on 2023-08-02  2:57:51
