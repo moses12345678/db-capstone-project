@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bookings`
+--
+
+DROP TABLE IF EXISTS `bookings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bookings` (
+  `BookingID` int NOT NULL AUTO_INCREMENT,
+  `CustomerID` int NOT NULL,
+  `TableNumber` int NOT NULL,
+  `BookingDate` date NOT NULL,
+  PRIMARY KEY (`BookingID`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bookings`
+--
+
+LOCK TABLES `bookings` WRITE;
+/*!40000 ALTER TABLE `bookings` DISABLE KEYS */;
+INSERT INTO `bookings` VALUES (99,99,99,'2022-12-10');
+/*!40000 ALTER TABLE `bookings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Customers`
 --
 
@@ -150,7 +176,7 @@ CREATE TABLE `Orders` (
 
 LOCK TABLES `Orders` WRITE;
 /*!40000 ALTER TABLE `Orders` DISABLE KEYS */;
-INSERT INTO `Orders` VALUES (1,12,1,1,86,2),(1,19,3,2,65,8),(2,19,2,2,37,1),(3,15,2,3,37,1),(4,5,3,4,40,1),(5,8,1,5,43,1);
+INSERT INTO `Orders` VALUES (1,12,1,1,86,5),(1,19,3,2,65,5),(2,19,2,2,37,1),(3,15,2,3,37,1),(4,5,3,4,40,1),(5,8,1,5,43,1);
 /*!40000 ALTER TABLE `Orders` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -163,4 +189,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-02  2:57:51
+-- Dump completed on 2023-08-02  4:00:43

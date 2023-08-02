@@ -54,13 +54,30 @@ BEGIN
 END //
 
 DELIMITER ;
-# cdcdcdcdsf
+# Create a Updatebooking
 DELIMITER //
-CREATE PROCEDURE UpdateBooking(IN customer_ID INT, IN table_ID INT, IN booking_Date DATE)
+
+CREATE PROCEDURE UpdateBooking(
+    IN table_number INT,
+    IN booking_date DATE
+)
 BEGIN
-    SELECT customerID, tableNo, BookingSlot
-    FROM Customers
-    WHERE customerID = customer_ID AND tableID = table_ID AND DATE(BookingSlot) = booking_Date;
+    UPDATE Bookings
+    SET TableNumber = table_number, BookingDate = booking_date
+    WHERE BookingID = BookingID;
+END //
+
+DELIMITER ;
+
+# Create cancel booking procedure
+DELIMITER //
+
+CREATE PROCEDURE CancelBooking(
+    IN table_number INT
+)
+BEGIN
+    DELETE FROM Bookings
+    WHERE TableNumber = table_number;
 END //
 
 DELIMITER ;
